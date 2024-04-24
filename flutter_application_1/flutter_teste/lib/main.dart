@@ -1,5 +1,8 @@
+
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_teste/settings_screen.dart';
 
 class AppBarDemo extends StatelessWidget {
   const AppBarDemo({Key? key}) : super(key: key);
@@ -11,7 +14,7 @@ class AppBarDemo extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue, // Cor de fundo do AppBar
+        backgroundColor: Color(0xF447198), // Cor de fundo do AppBar
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu),
@@ -23,7 +26,7 @@ class AppBarDemo extends StatelessWidget {
           ),
         ),
         title: Text(
-          'AppBar Title',
+          'Instagram',
         ),
         actions: [
           IconButton(
@@ -67,14 +70,23 @@ class AppBarDemo extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage('assets/images/profile.jpg'),
+                  ),
+                  Text(
+                      'Ana Lucia',
+                      style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
               ),
             ),
+
             ListTile(
               leading: Icon(Icons.home),
               title: Text('Home'),
@@ -89,6 +101,10 @@ class AppBarDemo extends StatelessWidget {
               onTap: () {
                 // Ação ao selecionar "Settings"
                 Navigator.pop(context); // Fechar o Drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
+                );
               },
             ),
             ListTile(
@@ -107,9 +123,13 @@ class AppBarDemo extends StatelessWidget {
 }
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => MyApp(),
+    ),
+  );
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
